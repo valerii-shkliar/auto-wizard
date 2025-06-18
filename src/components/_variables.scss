@@ -1,0 +1,18 @@
+@use '../fonts/fonts' as *;
+
+$primaryFontBlack: 'robotoBlack', 'sans serif';
+$primaryFontBold: 'robotoBold', 'sans serif';
+$primaryFontExtraBold: 'robotoExtraBold', 'sans serif';
+$primaryFontExtraLight: 'robotoExtraLight', 'sans serif';
+$primaryFontLight: 'robotoLight', 'sans serif';
+$primaryFontMedium: 'robotoMedium', 'sans serif';
+$primaryFontRegular: 'robotoRegular', 'sans serif';
+$primaryFontSemiBold: 'robotoSemiBold', 'sans serif';
+$primaryFontThin: 'robotoThin', 'sans serif';
+
+$primaryColor: #273c75;
+
+@mixin wrapper {
+  max-width: 1200px;
+  margin: auto;
+}
