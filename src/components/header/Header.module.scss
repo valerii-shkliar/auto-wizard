@@ -1,9 +1,12 @@
 @use '../variables' as *;
+.header {
+  margin-bottom: 50px;
 
-.wrapper {
-  @include wrapper;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .wrapper {
+    @include wrapper;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

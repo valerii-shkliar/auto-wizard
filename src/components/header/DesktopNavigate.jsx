@@ -1,7 +1,9 @@
 import { NavLink, useLocation } from 'react-router';
 import style from './DesktopNavigate.module.scss';
 import clsx from 'clsx';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+const URL = 'http://localhost:4000/api/users';
+const BASE_URL = 'http://localhost:4000/';
 
 function DesktopNavigate() {
   const location = useLocation();

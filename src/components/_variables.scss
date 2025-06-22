@@ -11,8 +11,23 @@ $primaryFontSemiBold: 'robotoSemiBold', 'sans serif';
 $primaryFontThin: 'robotoThin', 'sans serif';
 
 $primaryColor: #273c75;
+$secondaryColor: rgb(0, 132, 255);
+$primaryBackgroundColor: #fafafb;
+$border_shadowColor: #eaebee;
+$hoverBackgroundColor: #dfdfdf;
 
 @mixin wrapper {
   max-width: 1200px;
   margin: auto;
+}
+
+@mixin inputsStyle {
+  border-radius: 8px;
+  border: 1px solid $border_shadowColor;
+  padding: 10px;
+  transition: all 0.4s;
+}
+@mixin focusedInput {
+  border-color: #65a4f6;
+  box-shadow: 0 0 4px #65a4f6;
 }

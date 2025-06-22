@@ -1,0 +1,151 @@
+@use './../../../variables' as *;
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  .servicesSection {
+    width: 70%;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 5px 3px $border_shadowColor;
+
+    .headContainer {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $border_shadowColor;
+
+      .title {
+        font-size: 20px;
+        font-family: $primaryFontMedium;
+      }
+      .inputContainer {
+        min-width: 65%;
+        display: flex;
+        @include inputsStyle;
+
+        .iconContainer {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            width: 24px;
+            height: 24px;
+            color: #939393;
+          }
+        }
+        .searchInput {
+          width: 100%;
+          padding: 0px 10px;
+        }
+        &:focus-within {
+          @include focusedInput;
+        }
+      }
+    }
+
+    .mainContainer {
+      display: flex;
+
+      .partitionContainer {
+        border-right: 1px solid $border_shadowColor;
+        min-width: 35%;
+
+        .partitionList {
+          padding: 10px;
+
+          .partitionItem {
+            .partition {
+              padding: 10px;
+              display: flex;
+              align-items: center;
+              border-radius: 10px;
+              transition: background-color 0.4s;
+
+              .partitionIcon {
+                width: 24px;
+                height: 24px;
+              }
+
+              .partitionName {
+                margin-left: 12px;
+                color: $primaryColor;
+              }
+              .quantChosenServices {
+                margin-left: auto;
+                color: $primaryColor;
+              }
+              &:hover {
+                background-color: $hoverBackgroundColor;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+      .servicesContainer {
+        width: 65%;
+        .servicesList {
+          padding: 10px;
+
+          .servicesItem {
+            .service {
+              display: flex;
+              align-items: center;
+              padding: 10px;
+              border-radius: 10px;
+
+              .choseService {
+                appearance: none;
+                height: 24px;
+                width: 24px;
+                border-radius: 5px;
+                border: 1px solid #0c62d5;
+                position: relative;
+                background-image: none;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 80%;
+
+                &:hover {
+                  cursor: pointer;
+                  user-select: none;
+                }
+
+                &:checked {
+                  background-color: #0c62d5;
+                  background-image: url('./../../../../images/icons/tick.svg');
+                }
+              }
+              .serviceName {
+                color: $primaryColor;
+                margin-left: 10px;
+              }
+              .serviceTimeLead {
+                color: $primaryColor;
+                font-size: 12px;
+                margin-left: 15px;
+                opacity: 0;
+                transition: opacity 0.8s;
+              }
+              .servicePrice {
+                color: $primaryColor;
+                margin-left: auto;
+              }
+              &:hover {
+                background-color: $hoverBackgroundColor;
+                cursor: pointer;
+
+                .serviceTimeLead {
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

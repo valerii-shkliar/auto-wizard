@@ -4,7 +4,7 @@
   padding: 0px;
   margin: 0px;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   font-family: $primaryFontRegular;
 }
 
@@ -14,8 +14,14 @@
   box-sizing: border-box;
 }
 
-/* Links */
-
+body {
+  background-color: $primaryBackgroundColor;
+  color: black;
+}
+.wrapper {
+  max-width: 1200px;
+  margin: auto;
+}
 a,
 a:link,
 a:visited {
@@ -82,6 +88,8 @@ a {
 
 input:focus,
 input:active,
+textarea:focus,
+textarea:active,
 button:focus,
 button:active {
   outline: none;
