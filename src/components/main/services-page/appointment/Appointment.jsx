@@ -2,7 +2,7 @@ import { BiSolidContact } from 'react-icons/bi';
 import { FaCar } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
 import { BsFillPencilFill } from 'react-icons/bs';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import InputBox from './InputBox';
 import AdditionalButton from './AdditionalButton';
 import LabelBox from './LabelBox';
@@ -106,4 +106,4 @@ function Appointment() {
   );
 }
 
-export default Appointment;
+export default memo(Appointment);

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import ServicesApi from '../../../../api/ServicesApi';
+import { FaCartArrowDown } from 'react-icons/fa6';
 import style from './Services.module.scss';
+import PartitionItem from './PartitionItem';
 const {
   partitionContainer,
   partitionList,
@@ -10,36 +10,20 @@ const {
   partitionName,
   quantChosenServices,
 } = style;
-const URL = 'http://localhost:4000/api/services/';
 
-function Partitions({ sendServicesList }) {
-  const [partitionsList, setPartitionsList] = useState([]);
-
-  useEffect(() => {
-    ServicesApi.getList(URL).then((list) => {
-      console.log(list);
-      setPartitionsList(list);
-    });
-  }, []);
-
-  function handlePartitionClick(index) {
-    const servicesList = partitionsList[index].servicesList;
-
-    sendServicesList(servicesList);
-  }
+function Partitions({ partitionsList }) {
   return (
     <div className={partitionContainer}>
       <ul className={partitionList}>
-        {partitionsList.map(({ id, partition: title, icon }, index) => {
-          return (
-            <li key={id} className={partitionItem}>
-              <div className={partition} onClick={() => handlePartitionClick(index)}>
-                <img className={partitionIcon} src={icon} alt={title} />
-                <p className={partitionName}>{title}</p>
-                <span className={quantChosenServices}>0</span>
-              </div>
-            </li>
-          );
+        <li className={partitionItem}>
+          <div className={partition} onClick={() => {}}>
+            <FaCartArrowDown className={partitionIcon} />
+            <p className={partitionName}>Chosen services</p>
+            <span className={quantChosenServices}>0</span>
+          </div>
+        </li>
+        {partitionsList?.map(({ id, partition: title, icon }, index) => {
+          return <PartitionItem key={id} index={index} icon={icon} title={title} />;
         })}
       </ul>
     </div>

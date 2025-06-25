@@ -1,5 +1,6 @@
 import { IoSearch } from 'react-icons/io5';
 import style from './Services.module.scss';
+import { memo } from 'react';
 const { headContainer, title, inputContainer, iconContainer, icon, searchInput } = style;
 
 function Head() {
@@ -16,4 +17,4 @@ function Head() {
   );
 }
 
-export default Head;
+export default memo(Head);
