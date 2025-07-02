@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+const SERVICE_CART = 'servicesCart';
 const initialState = {
   usersData: {
     userName: '',
@@ -8,6 +9,7 @@ const initialState = {
     comment: '',
   },
   services: {},
+  countServices: 0,
   openedPartition: '',
 };
 
@@ -31,17 +33,23 @@ const servicesAppointmentSlice = createSlice({
       if (!foundPartition) {
         state.services[state.openedPartition] = [{ ...payload }];
       }
+      state.countServices++;
     },
     removeService: (state, { payload }) => {
-      const partition = state.openedPartition;
+      let services = state.services;
+      --state.countServices;
 
-      return {
-        ...state,
-        services: {
-          ...state.services,
-          [partition]: state.services[partition].filter((service) => service.id !== payload.id),
-        },
-      };
+      if (state.openedPartition === SERVICE_CART) {
+        for (const key in services) {
+          if (Object.prototype.hasOwnProperty.call(services, key)) {
+            services[key] = services[key].filter((item) => item.id !== payload.id);
+          }
+        }
+      } else {
+        services[state.openedPartition] = services[state.openedPartition].filter(
+          (service) => service.id !== payload.id
+        );
+      }
     },
     markOpenedPartition: (state, { payload }) => {
       state.openedPartition = payload;
@@ -51,6 +59,10 @@ const servicesAppointmentSlice = createSlice({
 
 export const selectOpenedPartition = (state) => {
   return state.servicesAppointment.openedPartition;
+};
+
+export const selectCountServices = (state) => {
+  return state.servicesAppointment.countServices;
 };
 
 export const selectedServicesInPartitions = (title) => {
@@ -71,6 +83,10 @@ export const selectChosenServiceById = (id) => {
     }
     return false;
   };
+};
+
+export const selectChosenAllServices = (state) => {
+  return state.servicesAppointment.services;
 };
 
 export const { addService, removeService, markOpenedPartition } = servicesAppointmentSlice.actions;

@@ -31,3 +31,12 @@ $hoverBackgroundColor: #dfdfdf;
   border-color: #65a4f6;
   box-shadow: 0 0 4px #65a4f6;
 }
+
+@mixin iconPseudo($path, $size) {
+  content: '';
+  width: $size;
+  height: $size;
+  background-image: url($path);
+  background-position: center;
+  background-repeat: no-repeat;
+}

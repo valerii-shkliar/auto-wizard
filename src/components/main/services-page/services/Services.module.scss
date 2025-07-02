@@ -68,6 +68,10 @@
                 width: 24px;
                 height: 24px;
                 color: $primaryColor;
+
+                &.active {
+                  color: $secondaryColor;
+                }
               }
 
               .partitionName {
@@ -89,6 +93,44 @@
       }
       .servicesContainer {
         width: 65%;
+
+        .titleEmptyServices {
+          font-size: 16px;
+          font-family: $primaryFontRegular;
+          padding: 20px;
+          text-align: center;
+        }
+        .textAboutServices {
+          padding: 20px 20px 0px 20px;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+
+          &:first-of-type {
+            &::before {
+              @include iconPseudo('./../../../../images/icons/pointer-services.svg', 40px);
+              transform: scale(-1, 1);
+            }
+          }
+          &:last-of-type {
+            &::after {
+              @include iconPseudo('./../../../../images/icons/pointer-services.svg', 40px);
+            }
+          }
+        }
+
+        .sectionChosenServices {
+          border-bottom: 1px solid $border_shadowColor;
+          width: 100%;
+
+          .titleChosenServices {
+            font-size: 16px;
+            font-family: $primaryFontMedium;
+            padding: 20px 20px 0px 20px;
+          }
+        }
         .servicesList {
           padding: 10px;
 
