@@ -6,7 +6,7 @@ import {
   selectCountServices,
   selectOpenedPartition,
 } from '../../../../store/slices/servicesAppointment';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { partitionCart } from './Services';
 import CartList from './CartList';
 const { servicesContainer } = style;
@@ -17,23 +17,31 @@ function List({ partitionsList }) {
   const countServices = useSelector(selectCountServices);
   const [servicesList, setServicesList] = useState([]);
   const [chosenServicesList, setChosenServicesList] = useState([]);
+  const firstOpenCart = useRef(false);
+  console.log(firstOpenCart.current);
 
   useEffect(() => {
     let list = [];
 
     if (partitionCart.type === openedPartition) {
       list = fillServicesCart(chosenServices);
+      firstOpenCart.current = true;
+
       setChosenServicesList(list);
-    } else {
+      return;
+    }
+    if (openedPartition !== '') {
       for (const partition of partitionsList) {
         if (partition.partition === openedPartition) {
           list = partition.servicesList;
         }
       }
+      firstOpenCart.current = true;
+
       setServicesList(list);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partitionsList, openedPartition]);
+  }, [openedPartition, chosenServices]);
 
   function fillServicesCart(services) {
     const newList = [];
@@ -67,7 +75,7 @@ function List({ partitionsList }) {
       </div>
     );
 
-  return openedPartition === partitionCart.type && !countServices ? (
+  return (openedPartition === partitionCart.type && !countServices) || !firstOpenCart.current ? (
     <div className={servicesContainer}>
       <h4 className={style.titleEmptyServices}>Here may be your order</h4>
       <p className={style.textAboutServices}>
