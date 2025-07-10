@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Wrapper from '../../../layouts/Wrapper';
 import Head from './Head';
 import Partitions from './Partitions';
@@ -7,22 +6,19 @@ import List from './List';
 import Appointment from './../appointment/Appointment';
 import style from './Services.module.scss';
 import ServicesApi from '../../../../api/ServicesApi';
+import { useDispatch } from 'react-redux';
+import { saveAllServices } from '../../../../store/slices/servicesAppointment';
 const { wrapper, servicesSection, mainContainer } = style;
-const URL = 'http://localhost:4000/api/services/';
-export const partitionCart = {
-  id: uuidv4(),
-  partition: 'Chosen Services',
-  type: 'servicesCart',
-};
+const SERVICES_URL = 'http://localhost:4000/api/services/';
 
 function Services() {
-  const [partitionsList, setPartitionsList] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    ServicesApi.getList(URL).then((list) => {
-      list.unshift(partitionCart);
-      setPartitionsList(list);
+    ServicesApi.getList(SERVICES_URL).then((list) => {
+      dispatch(saveAllServices(list));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -31,8 +27,8 @@ function Services() {
         <div className={servicesSection}>
           <Head />
           <div className={mainContainer}>
-            <Partitions partitionsList={partitionsList} />
-            <List partitionsList={partitionsList} />
+            <Partitions />
+            <List />
           </div>
         </div>
         <Appointment />

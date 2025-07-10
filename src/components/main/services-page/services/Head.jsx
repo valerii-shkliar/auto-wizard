@@ -1,6 +1,8 @@
 import { IoSearch } from 'react-icons/io5';
 import style from './Services.module.scss';
 import { memo } from 'react';
+import { useSelector } from 'react-redux';
+import { selectTest, test } from '../../../../store/slices/servicesAppointment';
 const { headContainer, title, inputContainer, iconContainer, icon, searchInput } = style;
 
 function Head() {

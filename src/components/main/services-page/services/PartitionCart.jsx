@@ -1,35 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   markOpenedPartition,
-  selectQuantServicesInPartition,
   selectOpenedPartition,
+  selectQuantAllServices,
 } from './../../../../store/slices/servicesAppointment';
 import style from './Services.module.scss';
-import { useMemo } from 'react';
 import clsx from 'clsx';
+import { FaCartArrowDown } from 'react-icons/fa6';
 const { partitionItem, partition, partitionIcon, partitionName, quantChosenServices, active } =
   style;
 
-function PartitionItem({ icon, title }) {
-  // const selectQuantServices = useMemo(() => selectQuantServicesInPartition(title), [title]);
-  const quantServices = useSelector(useMemo(() => selectQuantServicesInPartition(title), [title]));
+function PartitionCart({ partition: title, type }) {
   const openedPartition = useSelector(selectOpenedPartition);
   const dispatch = useDispatch();
-  const partitionClass = clsx(partition, openedPartition === title ? active : '');
+  const quantAllServices = useSelector(selectQuantAllServices);
+
+  const iconClass = clsx(partitionIcon, quantAllServices ? active : '');
+  const partitionClass = clsx(partition, openedPartition === type ? active : '');
 
   function handlePartitionClick() {
-    dispatch(markOpenedPartition(title));
+    dispatch(markOpenedPartition(type));
   }
 
   return (
     <li className={partitionItem}>
       <div className={partitionClass} onClick={handlePartitionClick}>
-        <img className={partitionIcon} src={icon} alt={title} />
+        <FaCartArrowDown className={iconClass} />
         <p className={partitionName}>{title}</p>
-        <span className={quantChosenServices}>{quantServices}</span>
+        <span className={quantChosenServices}>{quantAllServices}</span>
       </div>
     </li>
   );
 }
 
-export default PartitionItem;
+export default PartitionCart;
