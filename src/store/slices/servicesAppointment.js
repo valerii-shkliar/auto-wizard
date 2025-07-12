@@ -19,16 +19,16 @@ const servicesAppointmentSlice = createSlice({
       for (let i = 0; i < optedServices.length; i++) {
         const partitionItem = optedServices[i];
 
-        if (partitionItem.partition === state.openedPartition) {
-          partitionItem.servicesList.push(payload);
+        if (partitionItem.partition === payload.partition) {
+          partitionItem.servicesList.push(payload.service);
           foundPartition = true;
           break;
         }
       }
       if (!foundPartition) {
         const addedService = {
-          partition: state.openedPartition,
-          servicesList: [{ ...payload }],
+          partition: payload.partition,
+          servicesList: [{ ...payload.service }],
         };
         state.optedServices.push(addedService);
       }
@@ -37,14 +37,17 @@ const servicesAppointmentSlice = createSlice({
       const optedServices = state.optedServices;
       state.quantAllServices--;
 
-      if (state.openedPartition === SERVICE_CART) {
-        removeServiceFromCart(optedServices, payload);
+      if (payload.partition === SERVICE_CART) {
+        removeServiceFromCart(optedServices, payload.service);
       } else {
-        removeServiceFromOpenedPartitions(optedServices, state.openedPartition, payload);
+        removeServiceFromOpenedPartitions(optedServices, payload.partition, payload.service);
       }
     },
     markOpenedPartition: (state, { payload }) => {
       state.openedPartition = payload;
+    },
+    resetOpenedPartition: (state) => {
+      state.openedPartition = '';
     },
     saveAllServices: (state, { payload }) => {
       state.allServices = payload;
@@ -52,8 +55,13 @@ const servicesAppointmentSlice = createSlice({
   },
 });
 
-export const { addService, removeService, markOpenedPartition, saveAllServices } =
-  servicesAppointmentSlice.actions;
+export const {
+  addService,
+  removeService,
+  markOpenedPartition,
+  resetOpenedPartition,
+  saveAllServices,
+} = servicesAppointmentSlice.actions;
 export default servicesAppointmentSlice.reducer;
 
 function removeServiceFromCart(optedServices, payload) {
@@ -81,20 +89,6 @@ function removeServiceFromOpenedPartitions(optedServices, openedPartition, paylo
   }
 }
 
-export const selectOptedServiceById = (id) => {
-  return (state) => {
-    const servicesList = getServicesListByPartition(
-      state.servicesAppointment.optedServices,
-      state.servicesAppointment.openedPartition
-    );
-
-    if (servicesList.length) {
-      return getServiceById(servicesList, id);
-    }
-    return false;
-  };
-};
-
 export const selectQuantAllServices = (state) => {
   return state.servicesAppointment.quantAllServices;
 };
@@ -109,6 +103,17 @@ export const selectAllServices = (state) => {
 
 export const selectOptedServices = (state) => {
   return state.servicesAppointment.optedServices;
+};
+
+export const selectOptedServiceById = (id) => {
+  return (state) => {
+    const service = getServiceById(state, id);
+
+    if (service) {
+      return service;
+    }
+    return false;
+  };
 };
 
 export const selectServicesByOpenedPartition = createSelector(
@@ -135,6 +140,14 @@ function getServicesListByPartition(services, openedPartition) {
   return [];
 }
 
-function getServiceById(list, id) {
-  return list.find((item) => item.id === id);
+function getServiceById(state, id) {
+  const services = state.servicesAppointment.optedServices;
+
+  for (let i = 0; i < services.length; i++) {
+    const service = services?.[i].servicesList.find((item) => item.id === id);
+
+    if (service) {
+      return service;
+    }
+  }
 }

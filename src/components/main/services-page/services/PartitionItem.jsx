@@ -7,11 +7,11 @@ import {
 import style from './Services.module.scss';
 import { useMemo } from 'react';
 import clsx from 'clsx';
+import { resetFilter } from '../../../../store/slices/services-section/filterSlice';
 const { partitionItem, partition, partitionIcon, partitionName, quantChosenServices, active } =
   style;
 
 function PartitionItem({ icon, title }) {
-  // const selectQuantServices = useMemo(() => selectQuantServicesInPartition(title), [title]);
   const quantServices = useSelector(useMemo(() => selectQuantServicesInPartition(title), [title]));
   const openedPartition = useSelector(selectOpenedPartition);
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ function PartitionItem({ icon, title }) {
 
   function handlePartitionClick() {
     dispatch(markOpenedPartition(title));
+    dispatch(resetFilter());
   }
 
   return (

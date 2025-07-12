@@ -7,6 +7,7 @@ import {
 import style from './Services.module.scss';
 import clsx from 'clsx';
 import { FaCartArrowDown } from 'react-icons/fa6';
+import { resetFilter } from '../../../../store/slices/services-section/filterSlice';
 const { partitionItem, partition, partitionIcon, partitionName, quantChosenServices, active } =
   style;
 
@@ -20,6 +21,7 @@ function PartitionCart({ partition: title, type }) {
 
   function handlePartitionClick() {
     dispatch(markOpenedPartition(type));
+    dispatch(resetFilter());
   }
 
   return (
