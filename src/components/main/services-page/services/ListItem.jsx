@@ -7,7 +7,7 @@ import {
   removeService,
   selectOptedServiceById,
   selectOpenedPartition,
-} from '../../../../store/slices/servicesAppointment';
+} from '../../../../store/slices/services-section/servicesAppointmentSlice';
 import { partitionCart } from './Partitions';
 import { selectFilterTitle } from '../../../../store/slices/services-section/filterSlice';
 const { servicesItem, choseService, serviceName, serviceTimeLead, servicePrice, pointedText } =

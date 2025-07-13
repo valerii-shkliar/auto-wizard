@@ -6,7 +6,7 @@ import {
   selectOptedServices,
   selectQuantAllServices,
   selectServicesByOpenedPartition,
-} from '../../../../store/slices/servicesAppointment';
+} from '../../../../store/slices/services-section/servicesAppointmentSlice';
 import { partitionCart } from './Partitions';
 import CartList from './CartList';
 import style from './Services.module.scss';

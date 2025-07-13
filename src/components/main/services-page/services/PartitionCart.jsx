@@ -3,7 +3,7 @@ import {
   markOpenedPartition,
   selectOpenedPartition,
   selectQuantAllServices,
-} from './../../../../store/slices/servicesAppointment';
+} from '../../../../store/slices/services-section/servicesAppointmentSlice';
 import style from './Services.module.scss';
 import clsx from 'clsx';
 import { FaCartArrowDown } from 'react-icons/fa6';

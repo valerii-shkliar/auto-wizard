@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import style from './Services.module.scss';
 import PartitionItem from './PartitionItem';
 import { useSelector } from 'react-redux';
-import { selectAllServices } from '../../../../store/slices/servicesAppointment';
+import { selectAllServices } from '../../../../store/slices/services-section/servicesAppointmentSlice';
 import PartitionCart from './PartitionCart';
 const { partitionContainer, partitionList } = style;
 export const partitionCart = {

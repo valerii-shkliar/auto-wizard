@@ -3,7 +3,7 @@ import {
   markOpenedPartition,
   selectQuantServicesInPartition,
   selectOpenedPartition,
-} from './../../../../store/slices/servicesAppointment';
+} from '../../../../store/slices/services-section/servicesAppointmentSlice';
 import style from './Services.module.scss';
 import { useMemo } from 'react';
 import clsx from 'clsx';

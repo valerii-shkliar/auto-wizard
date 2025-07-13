@@ -7,7 +7,7 @@ import Appointment from './../appointment/Appointment';
 import style from './Services.module.scss';
 import ServicesApi from '../../../../api/ServicesApi';
 import { useDispatch } from 'react-redux';
-import { saveAllServices } from '../../../../store/slices/servicesAppointment';
+import { saveAllServices } from '../../../../store/slices/services-section/servicesAppointmentSlice';
 const { wrapper, servicesSection, mainContainer } = style;
 const SERVICES_URL = 'http://localhost:4000/api/services/';
 export const FILTER_PARTITION = 'filterPartition';

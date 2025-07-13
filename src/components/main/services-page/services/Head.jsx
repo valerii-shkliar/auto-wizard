@@ -9,7 +9,7 @@ import {
   setFilterByTitle,
 } from '../../../../store/slices/services-section/filterSlice';
 import clsx from 'clsx';
-import { resetOpenedPartition } from '../../../../store/slices/servicesAppointment';
+import { resetOpenedPartition } from '../../../../store/slices/services-section/servicesAppointmentSlice';
 const {
   headContainer,
   title,
