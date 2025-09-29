@@ -67,7 +67,9 @@ function ListItem({ service, checked, partition, regExp }) {
         />
 
         <p className={serviceName}>{regExp ? pointFilteredText(name, regExp) : name}</p>
-        <span className={serviceTimeLead}>{`approx.: ${convertLeadTime(leadTime)}`}</span>
+        <span className={serviceTimeLead}>
+          {!isNaN(leadTime) && `approx.: ${convertLeadTime(leadTime)}`}
+        </span>
         <span className={servicePrice}>{`from ${price}`}</span>
       </div>
     </li>
