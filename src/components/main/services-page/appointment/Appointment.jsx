@@ -2,6 +2,7 @@ import { BiSolidContact } from 'react-icons/bi';
 import { FaCar } from 'react-icons/fa';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { memo, useEffect, useState } from 'react';
+import { APPOINTMENTS_URL } from './../../../../api/url';
 import InputBox from './InputBox';
 import AdditionalButton from './AdditionalButton';
 import LabelBox from './LabelBox';
@@ -14,6 +15,7 @@ import {
 import { Formik, Form } from 'formik';
 import { regExpAnyDigits } from '../../../../constants/regExp';
 import { validationSchemaAppointment } from './validationSchemaAppointment';
+import ServicesApi from '../../../../api/ServicesApi';
 
 const { appointmentSection, title, appointmentForm, signUpBtn, titleCost, costText } = style;
 const initialValues = {
@@ -23,7 +25,6 @@ const initialValues = {
   millage: '',
   comment: '',
 };
-
 function Appointment() {
   const [openedAdditionalInfo, setOpenedAdditionalInfo] = useState({
     vehicle: false,
@@ -57,6 +58,20 @@ function Appointment() {
     setCost(newCost);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantAllServices]);
+
+  useEffect(() => {
+    ServicesApi.create(APPOINTMENTS_URL, {
+      name: 'Valerii',
+      phone: '+380633975288',
+      comment: 'I am the best developer!',
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const headerJSX = quantAllServices ? (
     <div className={titleCost}>

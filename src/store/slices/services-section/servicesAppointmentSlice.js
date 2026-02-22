@@ -134,7 +134,7 @@ export const selectQuantServicesInPartition = (title) => {
 function getServicesListByPartition(services, openedPartition) {
   for (let i = 0; i <= services.length; i++) {
     if (services[i]?.partition === openedPartition) {
-      return services[i].servicesList;
+      return services[i]?.servicesList;
     }
   }
   return [];

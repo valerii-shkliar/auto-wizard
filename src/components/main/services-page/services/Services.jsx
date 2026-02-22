@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SERVICES_URL } from './../../../../api/url';
 import Wrapper from '../../../layouts/Wrapper';
 import Head from './Head';
 import Partitions from './Partitions';
@@ -9,7 +10,7 @@ import ServicesApi from '../../../../api/ServicesApi';
 import { useDispatch } from 'react-redux';
 import { saveAllServices } from '../../../../store/slices/services-section/servicesAppointmentSlice';
 const { wrapper, servicesSection, mainContainer } = style;
-const SERVICES_URL = 'http://localhost:4000/api/services/';
+
 export const FILTER_PARTITION = 'filterPartition';
 
 function Services() {
